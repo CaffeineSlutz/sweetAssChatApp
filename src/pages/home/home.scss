@@ -1,3 +1,27 @@
 page-home {
-
+    ion-content {
+        ion-card {
+            ion-card-content {
+                display: flex;
+                #user-img {
+                    width: 4em;
+                    border-radius: 100%;
+                    border: 0.1em solid black;
+                }
+                .message {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding-left: 1em;
+                    #message-title #message-preview {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    #message-preview {
+                        color: lightgray;
+                    }
+                }
+            }
+        }
+    }
 }
