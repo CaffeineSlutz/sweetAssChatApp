@@ -14,6 +14,7 @@ import {FriendsPageModule} from "../pages/friends/friends.module";
 import {LoginPageModule} from "../pages/login/login.module";
 import {NotificationsPageModule} from "../pages/notifications/notifications.module";
 import {LogoutPageModule} from "../pages/logout/logout.module";
+import {EditAccountInfoPageModule} from "../pages/edit-account-info/edit-account-info.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {LogoutPageModule} from "../pages/logout/logout.module";
     LoginPageModule,
     NotificationsPageModule,
     LogoutPageModule,
+    EditAccountInfoPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
