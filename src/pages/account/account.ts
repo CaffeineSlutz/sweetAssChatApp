@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from "../home/home";
-import {NotificationsPage} from "../notifications/notifications";
-import {FriendsPage} from "../friends/friends";
-import {LogoutPage} from "../logout/logout";
+// import {HomePage} from "../home/home";
+// import {NotificationsPage} from "../notifications/notifications";
+// import {FriendsPage} from "../friends/friends";
+// import {LogoutPage} from "../logout/logout";
 
 /**
  * Generated class for the AccountPage page.

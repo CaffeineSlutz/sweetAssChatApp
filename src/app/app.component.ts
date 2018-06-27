@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import {RegistrationPage} from "../pages/registration/registration";
 import {NotificationsPage} from "../pages/notifications/notifications";
 import {FriendsPage} from "../pages/friends/friends";
 import {LogoutPage} from "../pages/logout/logout";

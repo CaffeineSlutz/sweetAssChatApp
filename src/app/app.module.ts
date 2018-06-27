@@ -15,7 +15,18 @@ import {LoginPageModule} from "../pages/login/login.module";
 import {NotificationsPageModule} from "../pages/notifications/notifications.module";
 import {LogoutPageModule} from "../pages/logout/logout.module";
 import {EditAccountInfoPageModule} from "../pages/edit-account-info/edit-account-info.module";
+import {AngularFireModule} from "angularfire2";
+import {AngularFireDatabaseModule} from "angularfire2/database";
 
+
+var config = {
+  apiKey: "AIzaSyCVmQTZSgGpRtE6zQ1QyN0tFT6BlACAYmU",
+  authDomain: "sweetasschatapp.firebaseapp.com",
+  databaseURL: "https://sweetasschatapp.firebaseio.com",
+  projectId: "sweetasschatapp",
+  storageBucket: "sweetasschatapp.appspot.com",
+  messagingSenderId: "837514495650"
+};
 @NgModule({
   declarations: [
     MyApp,
@@ -24,6 +35,8 @@ import {EditAccountInfoPageModule} from "../pages/edit-account-info/edit-account
   ],
   imports: [
     BrowserModule,
+    AngularFireDatabaseModule,
+    AngularFireModule,
     WelcomePageModule,
     RegistrationPageModule,
     AccountPageModule,
@@ -33,6 +46,7 @@ import {EditAccountInfoPageModule} from "../pages/edit-account-info/edit-account
     LogoutPageModule,
     EditAccountInfoPageModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
