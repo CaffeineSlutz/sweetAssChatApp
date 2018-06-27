@@ -15,6 +15,8 @@ import {LoginPageModule} from "../pages/login/login.module";
 import {NotificationsPageModule} from "../pages/notifications/notifications.module";
 import {LogoutPageModule} from "../pages/logout/logout.module";
 
+
+
 @NgModule({
   declarations: [
     MyApp,
