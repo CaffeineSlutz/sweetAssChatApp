@@ -9,6 +9,7 @@ import {FriendsPage} from "../pages/friends/friends";
 import {LogoutPage} from "../pages/logout/logout";
 import {AccountPage} from "../pages/account/account";
 import {EditAccountInfoPage} from "../pages/edit-account-info/edit-account-info";
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,8 +31,8 @@ export class MyApp {
       { title: 'Friends', component: FriendsPage},
       { title: 'Account', component: AccountPage},
       { title: 'Log Out', component: LogoutPage},
-      { title: 'Edit Account', component: EditAccountInfoPage}
-
+      { title: 'Edit Account', component: EditAccountInfoPage},
+      { title: 'Login', component: LoginPage}
     ];
 
   }
