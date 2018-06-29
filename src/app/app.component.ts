@@ -4,10 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import {NotificationsPage} from "../pages/notifications/notifications";
-import {FriendsPage} from "../pages/friends/friends";
-import {LogoutPage} from "../pages/logout/logout";
-import {AccountPage} from "../pages/account/account";
+import { NotificationsPage } from "../pages/notifications/notifications";
+import { FriendsPage } from "../pages/friends/friends";
+import { LogoutPage } from "../pages/logout/logout";
+import { AccountPage } from "../pages/account/account";
+import { AccountEditPage } from '../pages/account-edit/account-edit';
 import { LoginPage } from '../pages/login/login';
 
 @Component({
@@ -29,6 +30,7 @@ export class MyApp {
       { title: 'Notifications', component: NotificationsPage},
       { title: 'Friends', component: FriendsPage},
       { title: 'Account', component: AccountPage},
+      { title: 'AccountEdit', component: AccountEditPage},
       { title: 'Log Out', component: LogoutPage},
       { title: 'Login', component: LoginPage}
     ];

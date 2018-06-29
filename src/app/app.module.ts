@@ -11,6 +11,7 @@ import {WelcomePageModule} from "../pages/welcome/welcome.module";
 import {RegistrationPageModule} from "../pages/registration/registration.module";
 import {AccountPageModule} from "../pages/account/account.module";
 import {FriendsPageModule} from "../pages/friends/friends.module";
+import {AccountEditPageModule} from "../pages/account-edit/account-edit.module";
 import {LoginPageModule} from "../pages/login/login.module";
 import {NotificationsPageModule} from "../pages/notifications/notifications.module";
 import {LogoutPageModule} from "../pages/logout/logout.module";
@@ -26,6 +27,7 @@ import {LogoutPageModule} from "../pages/logout/logout.module";
     WelcomePageModule,
     RegistrationPageModule,
     AccountPageModule,
+    AccountEditPageModule,
     FriendsPageModule,
     LoginPageModule,
     NotificationsPageModule,

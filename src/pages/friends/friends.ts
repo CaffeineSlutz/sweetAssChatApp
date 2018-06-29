@@ -14,6 +14,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'friends.html',
 })
 export class FriendsPage {
+  friend = {
+    firstName: 'Megan',
+    lastName: 'Muirhead',
+    displayName: 'megaboty'
+  };
+  friend1 = {
+    firstName: 'Gabby',
+    lastName: 'Reese',
+    displayName: 'aangel'
+  };
+  friend2 = {
+    firstName: 'Jacob',
+    lastName: 'Boswell',
+    displayName: 'linuxninja39'
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

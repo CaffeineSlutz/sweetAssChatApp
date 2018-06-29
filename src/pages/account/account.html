@@ -1,4 +1,4 @@
-<!--
+ion<!--
   Generated template for the AccountPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -10,12 +10,38 @@
     <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>
    </button>
-    <ion-title>account</ion-title>
+    <ion-title>Account</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<!--<ion-img width="80" height="80" src="ez.png"></ion-img>-->
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item>
+    Name: {{ user.firstName }} {{ user.lastName }}
+    </ion-item>
+    <ion-item>
+    Email:  {{ user.email }}
+    </ion-item>
+    <ion-item>
+    Display Name: {{ user.displayName }}
+    </ion-item>
+    <ion-item>
+    Number: {{ user.number }}
+    </ion-item>
+    <ion-item>
+      Address: {{ user.address }}
+    </ion-item>
+    <ion-item>
+      City: {{ user.city }}
+    </ion-item>
+    <ion-item>
+      State: {{ user.state }}
+    </ion-item>
+    <ion-item>
+      Gender: {{ user.gender }}
+    </ion-item>
+  </ion-list>
 </ion-content>

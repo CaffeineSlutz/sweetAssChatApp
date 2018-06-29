@@ -10,12 +10,52 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>friends</ion-title>
+    <ion-title>Friends</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <ion-title>
+    Ya Friends M8:
+  </ion-title>
 
+  <ion-card>
+  <ion-card-content>
+    Name: {{ friend.firstName }} {{ friend.lastName }},
+    Display Name: {{ friend.displayName }}
+  </ion-card-content>
+  </ion-card>
+  <ion-card>
+  <ion-card-content>
+    Name: {{ friend1.firstName }} {{ friend1.lastName }},
+    Display Name: {{ friend1.displayName }}
+  </ion-card-content>
+  </ion-card>
+  <ion-card>
+  <ion-card-content>
+    Name: {{ friend2.firstName }} {{ friend2.lastName }},
+    Display Name: {{ friend2.displayName }}
+  </ion-card-content>
+  </ion-card>
+
+  <ion-title>
+    Recommend Friends:
+  </ion-title>
+
+  <ion-card>
+  <ion-card-content>
+    <ion-icon name="add-circle"></ion-icon>  Dean Jones
+  </ion-card-content>
+  </ion-card>
+  <ion-card>
+  <ion-card-content>
+    <ion-icon name="add-circle"></ion-icon>  Bobby Lane
+  </ion-card-content>
+  </ion-card>
+  <ion-card>
+  <ion-card-content>
+    <ion-icon name="add-circle"></ion-icon>  Hoppy Morgan
+  </ion-card-content>
+  </ion-card>
 </ion-content>
