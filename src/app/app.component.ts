@@ -4,11 +4,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+<<<<<<< HEAD
+import {NotificationsPage} from "../pages/notifications/notifications";
+import {FriendsPage} from "../pages/friends/friends";
+import {LogoutPage} from "../pages/logout/logout";
+import {AccountPage} from "../pages/account/account";
+import {EditAccountInfoPage} from "../pages/edit-account-info/edit-account-info";
+=======
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { FriendsPage } from "../pages/friends/friends";
 import { LogoutPage } from "../pages/logout/logout";
 import { AccountPage } from "../pages/account/account";
 import { AccountEditPage } from '../pages/account-edit/account-edit';
+>>>>>>> 2fd9e61eda00bd17a2aae9fdf048f7f97804bb31
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
 
@@ -31,10 +39,16 @@ export class MyApp {
       { title: 'Notifications', component: NotificationsPage},
       { title: 'Friends', component: FriendsPage},
       { title: 'Account', component: AccountPage},
+<<<<<<< HEAD
+      { title: 'Log Out', component: LogoutPage},
+      { title: 'Edit Account', component: EditAccountInfoPage},
+      { title: 'Login', component: LoginPage}
+=======
       { title: 'AccountEdit', component: AccountEditPage},
       { title: 'Logout', component: LogoutPage},
       { title: 'Login', component: LoginPage},
       { title: 'Welcome', component: WelcomePage}
+>>>>>>> 2fd9e61eda00bd17a2aae9fdf048f7f97804bb31
     ];
 
   }
