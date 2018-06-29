@@ -10,6 +10,7 @@ import { LogoutPage } from "../pages/logout/logout";
 import { AccountPage } from "../pages/account/account";
 import { AccountEditPage } from '../pages/account-edit/account-edit';
 import { LoginPage } from '../pages/login/login';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,8 +32,9 @@ export class MyApp {
       { title: 'Friends', component: FriendsPage},
       { title: 'Account', component: AccountPage},
       { title: 'AccountEdit', component: AccountEditPage},
-      { title: 'Log Out', component: LogoutPage},
-      { title: 'Login', component: LoginPage}
+      { title: 'Logout', component: LogoutPage},
+      { title: 'Login', component: LoginPage},
+      { title: 'Welcome', component: WelcomePage}
     ];
 
   }
