@@ -19,14 +19,14 @@ import {AngularFireModule} from "angularfire2";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 
 
-var config = {
-  apiKey: "AIzaSyCVmQTZSgGpRtE6zQ1QyN0tFT6BlACAYmU",
-  authDomain: "sweetasschatapp.firebaseapp.com",
-  databaseURL: "https://sweetasschatapp.firebaseio.com",
-  projectId: "sweetasschatapp",
-  storageBucket: "sweetasschatapp.appspot.com",
-  messagingSenderId: "837514495650"
-};
+// var config = {
+//   apiKey: "AIzaSyCVmQTZSgGpRtE6zQ1QyN0tFT6BlACAYmU",
+//   authDomain: "sweetasschatapp.firebaseapp.com",
+//   databaseURL: "https://sweetasschatapp.firebaseio.com",
+//   projectId: "sweetasschatapp",
+//   storageBucket: "sweetasschatapp.appspot.com",
+//   messagingSenderId: "837514495650"
+// };
 @NgModule({
   declarations: [
     MyApp,
@@ -46,7 +46,7 @@ var config = {
     LogoutPageModule,
     EditAccountInfoPageModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(config)
+    // AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

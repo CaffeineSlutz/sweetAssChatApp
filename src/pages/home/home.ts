@@ -14,11 +14,11 @@ export class HomePage {
   }
 
   getDataFromFirebase(){
-    this.afd.list('/Dumbie/').valueChanges().subscribe(
-      data => {
-        console.log(JSON.stringify(data));
-        this.items = data;
+    // this.afd.list('/Dumbie/').valueChanges().subscribe(
+    //   data => {
+    //     console.log(JSON.stringify(data));
+    //     this.items = data;
       }
-    )
-  }
+    // )
+  // }
 }
