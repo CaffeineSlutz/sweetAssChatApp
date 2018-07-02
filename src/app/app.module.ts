@@ -14,6 +14,12 @@ import {FriendsPageModule} from "../pages/friends/friends.module";
 import {LoginPageModule} from "../pages/login/login.module";
 import {NotificationsPageModule} from "../pages/notifications/notifications.module";
 import {LogoutPageModule} from "../pages/logout/logout.module";
+import { AngularFireModule } from 'angularfire2';
+import { FbAdminConfig } from "../../FbAdminConfig";
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,10 @@ import {LogoutPageModule} from "../pages/logout/logout.module";
     NotificationsPageModule,
     LogoutPageModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FbAdminConfig, 'my-app-name'),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +50,9 @@ import {LogoutPageModule} from "../pages/logout/logout.module";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseDbProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
