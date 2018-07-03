@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
+import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 
 @Component({
   selector: 'page-home',
@@ -8,7 +8,8 @@ import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private fbService: FirebaseDbProvider) {
+  constructor(public navCtrl: NavController, private fbp: FirebaseDbProvider) {
+    
   }
 
 }

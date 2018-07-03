@@ -1,33 +1,30 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 
-export interface Item { name: string; }
+export interface Item { content: string; }
 
 @Component({
   selector: 'app-root',
   template: `
     <ul>
       <li *ngFor="let item of items | async">
-        {{ item.name }}
+        {{ item.stuff }}
       </li>
     </ul>
   `
 })
 export class FirebaseDbProvider {
-  private itemsCollection: AngularFirestoreCollection<Item>;
-  items: Observable<Item[]>;
-  path: string = '';
-  constructor(public http: HttpClient, private afs: AngularFirestore) {
-    if (this.path.length > 1) {
-      this.itemsCollection = afs.collection<Item>(this.path);
-      this.items = this.itemsCollection.valueChanges();
-    } else {
-      console.log('WARNING Need to define a path in the firebase-db provider!');
-    }
+  itemsCollection: AngularFirestoreCollection<Item>
+  items: Observable<Item[]>
+  constructor(private afs: AngularFirestore) {
+    this.itemsCollection = this.afs.collection('dumbie')
+    this.items = this.itemsCollection.valueChanges();
+    this.getData();
   }
-  addItem(item: Item) {
-    this.itemsCollection.add(item);
+  getData(){
+    return this.items.subscribe(items => {
+      console.log(items);
+    });
   }
 }
