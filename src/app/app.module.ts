@@ -4,31 +4,57 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {WelcomePageModule} from "../pages/welcome/welcome.module";
+import {RegistrationPageModule} from "../pages/registration/registration.module";
+import {AccountPageModule} from "../pages/account/account.module";
+import {FriendsPageModule} from "../pages/friends/friends.module";
+import {AccountEditPageModule} from "../pages/account-edit/account-edit.module";
+import {LoginPageModule} from "../pages/login/login.module";
+import {NotificationsPageModule} from "../pages/notifications/notifications.module";
+import {LogoutPageModule} from "../pages/logout/logout.module";
+import { AngularFireModule } from 'angularfire2';
+import { FbAdminConfig } from "../../FbAdminConfig";
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+
   ],
   imports: [
     BrowserModule,
+    WelcomePageModule,
+    RegistrationPageModule,
+    AccountPageModule,
+    AccountEditPageModule,
+    FriendsPageModule,
+    LoginPageModule,
+    NotificationsPageModule,
+    LogoutPageModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FbAdminConfig, 'my-app-name'),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseDbProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
