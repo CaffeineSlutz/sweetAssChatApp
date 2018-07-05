@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>registration</ion-title>
+    <ion-title>Registration</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label>First Name: </ion-label>
+      <ion-input type="text" formControlName="fName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name: </ion-label>
+      <ion-input type="text" formControlName="lName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email: </ion-label>
+      <ion-input type="text"  formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-input type="text" formControlName="gender"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address: </ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>City</ion-label>
+      <ion-input type="text" formControlName="city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>State</ion-label>
+      <ion-input type="text" formControlName="state"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!todo.valid">Submit</button>
+  </form>
 </ion-content>

@@ -11,6 +11,7 @@ import { AccountPage } from "../pages/account/account";
 import { AccountEditPage } from '../pages/account-edit/account-edit';
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
+import {RegistrationPage} from "../pages/registration/registration";
 
 @Component({
   templateUrl: 'app.html'
@@ -34,7 +35,8 @@ export class MyApp {
       { title: 'AccountEdit', component: AccountEditPage},
       { title: 'Logout', component: LogoutPage},
       { title: 'Login', component: LoginPage},
-      { title: 'Welcome', component: WelcomePage}
+      { title: 'Welcome', component: WelcomePage},
+      { title: 'Registration', component: RegistrationPage}
     ];
 
   }
