@@ -22,11 +22,11 @@ export class RegistrationPage {
     this.todo = this.formBuilder.group({
       fName: ['', Validators.required],
       lName: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      gender: [''],
-      address: [''],
-      city: [''],
-      state: [''],
+      email: ['', [Validators.email, Validators.required]]
+      // gender: [''],
+      // address: [''],
+      // city: [''],
+      // state: [''],
 
     });
   }

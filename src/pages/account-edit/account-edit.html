@@ -14,46 +14,22 @@ ion<!--
   </ion-navbar>
 
 </ion-header>
-
-
-<ion-content padding>
+<ion-content>
+<form [formGroup]="userSettings" (ngSubmit)="logForm()">
   <ion-item>
-    <ion-label floating>Name</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label>First Name: </ion-label>
+    <ion-input type="text" formControlName="fName"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-label>Last Name: </ion-label>
+    <ion-input type="text" formControlName="lName"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Email</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Display Name</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Phone Number</ion-label>
-    <ion-input type="number"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Address</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label>Email: </ion-label>
+    <ion-input type="text"  formControlName="email"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label>Gender</ion-label>
-    <ion-select>
-      <ion-option>Male</ion-option>
-      <ion-option>Female</ion-option>
-      <ion-option>Other</ion-option>
-      <ion-option>Prefer not to say</ion-option>
-    </ion-select>
-  </ion-item>
+  <button ion-button type="submit" [disabled]="!userSettings.valid">Submit</button>
+</form>
 
 </ion-content>
