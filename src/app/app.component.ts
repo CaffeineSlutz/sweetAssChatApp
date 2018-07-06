@@ -1,16 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import {MenuController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { NotificationsPage } from "../pages/notifications/notifications";
 import { FriendsPage } from "../pages/friends/friends";
 import { LogoutPage } from "../pages/logout/logout";
-import { AccountPage } from "../pages/account/account";
-import { AccountEditPage } from '../pages/account-edit/account-edit';
 import { LoginPage } from '../pages/login/login';
-import { WelcomePage } from '../pages/welcome/welcome';
+import {AngularFireAuth} from "angularfire2/auth";
+
+//import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from "angularfire2/database-deprecated";
 
 @Component({
   templateUrl: 'app.html'
@@ -18,25 +17,24 @@ import { WelcomePage } from '../pages/welcome/welcome';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public afAuth: AngularFireAuth,
+              public menuCtrl: MenuController
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage},
-      { title: 'Notifications', component: NotificationsPage},
+      { title: 'Messages', component: HomePage},
       { title: 'Friends', component: FriendsPage},
-      { title: 'Account', component: AccountPage},
-      { title: 'AccountEdit', component: AccountEditPage},
       { title: 'Logout', component: LogoutPage},
-      { title: 'Login', component: LoginPage},
-      { title: 'Welcome', component: WelcomePage}
     ];
-
   }
 
   initializeApp() {
@@ -48,9 +46,16 @@ export class MyApp {
     });
   }
 
+  closeMenu(){
+    this.menuCtrl.close();
+
+  }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+
 }

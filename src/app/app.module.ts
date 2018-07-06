@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {WelcomePageModule} from "../pages/welcome/welcome.module";
-import {RegistrationPageModule} from "../pages/registration/registration.module";
 import {AccountPageModule} from "../pages/account/account.module";
 import {FriendsPageModule} from "../pages/friends/friends.module";
 import {AccountEditPageModule} from "../pages/account-edit/account-edit.module";
@@ -22,6 +21,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { HttpClientModule } from '@angular/common/http';
 
+import { Facebook } from '@ionic-native/facebook';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -31,7 +32,6 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     WelcomePageModule,
-    RegistrationPageModule,
     AccountPageModule,
     AccountEditPageModule,
     FriendsPageModule,
@@ -53,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseDbProvider
+    FirebaseDbProvider,
+    Facebook
   ]
 })
 export class AppModule {
