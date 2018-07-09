@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AngularFireAuth} from "angularfire2/auth";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the LogoutPage page.
@@ -15,11 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LogoutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public afAuth: AngularFireAuth
+  ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LogoutPage');
+    this.afAuth.auth.signOut();
+    this.navCtrl.setRoot(LoginPage);
   }
+
+
 
 }

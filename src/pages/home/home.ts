@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
+import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
+import {LoginPage} from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -8,8 +9,8 @@ import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private fbp: FirebaseDbProvider) {
-    
+  constructor(public navCtrl: NavController, private fbp: FirebaseDbProvider) {}
+  goToLogin(){
+    this.navCtrl.push(LoginPage);
   }
-
 }
