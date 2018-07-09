@@ -15,10 +15,10 @@ export interface Item { content: string; }
   `
 })
 export class FirebaseDbProvider {
-  itemsCollection: AngularFirestoreCollection<Item>
-  items: Observable<Item[]>
+  itemsCollection: AngularFirestoreCollection<Item>;
+  items: Observable<Item[]>;
   constructor(private afs: AngularFirestore) {
-    this.itemsCollection = this.afs.collection('dumbie')
+    this.itemsCollection = this.afs.collection('dumbie');
     this.items = this.itemsCollection.valueChanges();
     this.getData();
   }
