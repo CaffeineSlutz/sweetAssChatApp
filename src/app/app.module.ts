@@ -7,19 +7,21 @@ import { HomePage } from '../pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {WelcomePageModule} from '../pages/welcome/welcome.module';
-import {RegistrationPageModule} from '../pages/registration/registration.module';
-import {AccountPageModule} from '../pages/account/account.module';
-import {FriendsPageModule} from '../pages/friends/friends.module';
-import { LoginPageModule } from '../pages/login/login.module';
-import { NotificationsPageModule } from '../pages/notifications/notifications.module';
-import { LogoutPageModule } from '../pages/logout/logout.module';
+import {WelcomePageModule} from "../pages/welcome/welcome.module";
+import {AccountPageModule} from "../pages/account/account.module";
+import {FriendsPageModule} from "../pages/friends/friends.module";
+import {AccountEditPageModule} from "../pages/account-edit/account-edit.module";
+import {LoginPageModule} from "../pages/login/login.module";
+import {NotificationsPageModule} from "../pages/notifications/notifications.module";
+import {LogoutPageModule} from "../pages/logout/logout.module";
 import { AngularFireModule } from 'angularfire2';
 import { FbAdminConfig } from '../../FbAdminConfig';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { HttpClientModule } from '@angular/common/http';
+
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     WelcomePageModule,
-    RegistrationPageModule,
     AccountPageModule,
     FriendsPageModule,
     LoginPageModule,
@@ -50,7 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseDbProvider
+    FirebaseDbProvider,
+    Facebook
   ]
 })
 export class AppModule {
