@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { User } from '../../interfaces/user';
+import * as firebase from 'firebase/app'
 
 export interface Item { content: string; }
 
@@ -15,16 +17,22 @@ export interface Item { content: string; }
   `
 })
 export class FirebaseDbProvider {
+
   itemsCollection: AngularFirestoreCollection<Item>
   items: Observable<Item[]>
+
   constructor(private afs: AngularFirestore) {
-    this.itemsCollection = this.afs.collection('dumbie')
-    this.items = this.itemsCollection.valueChanges();
-    this.getData();
   }
-  getData(){
-    return this.items.subscribe(items => {
-      console.log(items);
-    });
+
+  getUsers(): Observable<any> {
+    return this.afs.collection('users').valueChanges();
+  }
+
+  saveUser(user:User) {
+    console.log(user);
+    this.afs.collection('users').add(user);
+  }
+  getCurrentUser(){
+    console.log(firebase.auth().currentUser);
   }
 }

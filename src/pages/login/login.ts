@@ -5,6 +5,8 @@ import { auth } from "firebase";
 import * as firebase from 'firebase/app'
 import { Facebook } from '@ionic-native/facebook';
 import { HomePage } from "../home/home";
+import { User } from '../../interfaces/user';
+import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 
 @IonicPage()
 @Component({
@@ -20,7 +22,8 @@ export class LoginPage {
     public navParams: NavParams,
     private afAuth: AngularFireAuth,
     private fb: Facebook,
-    private platform: Platform
+    private platform: Platform,
+    private authService: FirebaseDbProvider
   ) {
     afAuth.authState.subscribe((user: firebase.User) => {
       if (!user) {
@@ -36,7 +39,19 @@ export class LoginPage {
   }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(authenticated => {
+      console.log(authenticated);
+      if (authenticated.additionalUserInfo.isNewUser) {
+        const newUser:User = {
+          name:authenticated.user.displayName,
+          emailAddress:authenticated.user.email,
+          image:authenticated.user.photoURL,
+          userid:authenticated.user.uid
+        }
+        console.log('saving user');
+        this.authService.saveUser(newUser);
+      }
+    });
   }
 
 
