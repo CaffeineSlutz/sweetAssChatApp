@@ -7,23 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
+<ion-content>
 
+  <!--shows after login-->
+  <div *ngIf="afAuth.user | async as user; else showLogin">
+    <h1>Welcome {{ user.displayName }}! Thank you for signing in.</h1>
+    <button ion-button outline (click)="continueToApp(this.displayName)">Continue to App</button>
+    <button ion-button outline (click)="signOut()">Logout</button>
+  </div>
 
-<ion-content padding>
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-  <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password"></ion-input>
-  </ion-item>
-  <button id="submit" ion-button>Submit</button>
+  <!--shows before login-->
+  <ng-template #showLogin>
+    <p>To view The App please sign-in</p>
+    <button ion-button outline (click)="signInWithFacebook()"><ion-icon padding-right name="logo-facebook"></ion-icon>Login</button>
+    <button ion-button outline (click)="login()"><ion-icon padding-right name="logo-google"></ion-icon> Login</button>
+  </ng-template>
+
 </ion-content>
