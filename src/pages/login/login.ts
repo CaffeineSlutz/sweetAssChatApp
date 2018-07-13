@@ -42,23 +42,29 @@ export class LoginPage {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(authenticated => {
       console.log(authenticated);
       if (authenticated.additionalUserInfo.isNewUser) {
-        const newUser:User = {
-          name:authenticated.user.displayName,
-          emailAddress:authenticated.user.email,
-          image:authenticated.user.photoURL,
-          userid:authenticated.user.uid
-        }
-        console.log('saving user');
-        this.authService.saveUser(newUser);
+        this.createUser(authenticated);
       }
     });
   }
 
+  createUser(auth){
+    if (auth.additionalUserInfo.isNewUser){
+      const newUser:User = {
+        name:auth.user.displayName,
+        emailAddress:auth.user.email,
+        image:auth.user.photoURL,
+        userid:auth.user.uid,
+        friends:[]
+      }
+      this.authService.saveUser(newUser);
+    }
+  }
 
   signInWithFacebook() {
     if (this.platform.is('cordova')) {
       return this.fb.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        this.createUser(facebookCredential);
         return firebase.auth().signInWithCredential(facebookCredential);
       })
     }
@@ -67,8 +73,6 @@ export class LoginPage {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => console.log(res));
     }
-
-
   }
 
   public signOut() {
