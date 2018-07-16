@@ -31,5 +31,6 @@ export class FirebaseDbProvider {
 
   getCurrentUser(){
     console.log(firebase.auth().currentUser);
+    return firebase.auth().currentUser;
   }
 }

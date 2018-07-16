@@ -12,30 +12,26 @@ import { Message } from '../../interfaces/message';
 export class HomePage {
 
   constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
-    this.createNewMessage('this is a test message');
   }
 
   goToLogin(){
     this.navCtrl.push(LoginPage);
   }
 
-  createNewMessage(textMessage:string){
+  createNewMessage(textMessage:string, userUid:string){
     let currentUser = this.fdp.getCurrentUser();
-    console.log(currentUser);
     let today = new Date();
+    let messageID:string = currentUser.uid + userUid;
     const msg:Message = {
-      authorName:'billy',
-      authorEmail:'billybob@mail.com',
+      messageID:messageID,
+      authorName:currentUser.displayName,
+      authorEmail:currentUser.email,
       read:false,
       message:textMessage,
       dateReadable:`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`,
-      timeReadable:`${today.getHours()}:${today.getMinutes()}`,
-      year:today.getFullYear(),
-      month:today.getMonth(),
-      day:today.getDay(),
-      hour:today.getHours(),
-      minute:today.getMinutes()
+      timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
     }
-    
+    this.afs.collection('messages').add(msg);
+    console.log('message sent to the database!');
   }
 }
