@@ -18,6 +18,9 @@ export interface Item { content: string; }
 })
 export class FirebaseDbProvider {
 
+  itemsCollection: AngularFirestoreCollection<Item>;
+  items: Observable<Item[]>;
+
   constructor(private afs: AngularFirestore) {
   }
 
@@ -27,6 +30,10 @@ export class FirebaseDbProvider {
 
   saveUser(user:User) {
     this.afs.collection('users').add(user);
+  }
+
+  createThread(threadObject:Object){
+    this.afs.collection('thread').add(threadObject);
   }
 
   getCurrentUser(){

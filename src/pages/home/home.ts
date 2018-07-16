@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
-import {LoginPage} from '../login/login';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { firestore } from "firebase";
+import { AngularFirestore } from "angularfire2/firestore";
+import { Thread } from '../../interfaces/Thread'
+import { LoginPage } from '../login/login';
 import { Message } from '../../interfaces/message';
 
 @Component({
@@ -33,5 +35,20 @@ export class HomePage {
     }
     this.afs.collection('messages').add(msg);
     console.log('message sent to the database!');
+  }
+  
+  createThread(input:any){
+    let collRef = this.afs.collection('users').ref;
+
+    collRef.where('name', '==', input.value).onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
+        let foundUser = doc.data();
+        let thread:Thread;
+        thread.threadTitle = "";
+        thread.userCol.id.push(foundUser.userid);
+        thread.userCol.names.push(foundUser.name);
+        this.fdp.createThread(thread);
+      })
+    });
   }
 }
