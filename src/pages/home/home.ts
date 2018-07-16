@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
-import { firestore } from "firebase";
 import { AngularFirestore } from "angularfire2/firestore";
 import { Thread } from '../../interfaces/Thread'
 import { LoginPage } from '../login/login';
