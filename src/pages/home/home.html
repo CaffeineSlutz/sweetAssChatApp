@@ -8,6 +8,17 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      {{user.name}} <{{user.emailAddress}}>
+    </ion-item>
+  </ion-list>
   <ion-card>
     <ion-card-content>
       <img id="user-img" src="https://imgix.ttcdn.co/i/product/original/0/457939-0c324c98c4bd4463b0e8e828cfac91ac.png?quality=50&width=2000&bg-color=fff&auto=webp&fit=bounds&fm=jpeg">
@@ -18,4 +29,5 @@
     </ion-card-content>
   </ion-card>
 
+  <!--<input #user (keyup.enter)="addFriend(user)">-->
 </ion-content>

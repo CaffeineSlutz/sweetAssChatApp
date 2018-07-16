@@ -32,4 +32,10 @@ export class FirebaseDbProvider {
   getCurrentUser(){
     console.log(firebase.auth().currentUser);
   }
+  createThread(something){
+    this.afs.collection('thread').add(something);
+  }
+  createFriend(friend){
+    this.afs.collection('users').add(friend);
+  }
 }

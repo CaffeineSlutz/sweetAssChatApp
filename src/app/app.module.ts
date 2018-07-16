@@ -22,6 +22,7 @@ import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Facebook } from '@ionic-native/facebook';
+import { FirebaseProviderWithInjectableDecProvider } from '../providers/firebase-provider-with-injectable-dec/firebase-provider-with-injectable-dec';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { Facebook } from '@ionic-native/facebook';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseDbProvider,
-    Facebook
+    Facebook,
+    FirebaseProviderWithInjectableDecProvider
   ]
 })
 export class AppModule {

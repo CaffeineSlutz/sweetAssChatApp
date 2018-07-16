@@ -70,8 +70,8 @@ export class LoginPage {
           image:authenticated.user.photoURL,
           userid:authenticated.user.uid
         }
-        console.log('saving user');
-        this.authService.saveUser(newUser);
+        // console.log('saving user');
+        // this.authService.saveUser(newUser);
         // this.afs.collection("users").doc(authenticated.user.uid).collection("Friends").doc("new doc").set({key: "dis bitch value"})
 
       }
