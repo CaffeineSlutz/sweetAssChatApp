@@ -38,18 +38,22 @@ export class HomePage {
 
     userRef.where('name', '==', user.value).get()
       .then(snapshot => {
+
+        console.log("snapshot: ", snapshot);
+
         snapshot.forEach(doc => {
-          console.log(snapshot);
+          console.log("doc: ", doc);
+          //console.log("snapshot: ", snapshot);
 
           this.foundUser = doc.data();
           this.newThread.userCol.id.push(this.foundUser.userid);
           this.newThread.userCol.names.push(this.foundUser.name);
-          this.fbp.createThread(this.newThread.userCol);
+          this.fbp.createThread(this.newThread);
           console.log(doc.id, '=>', doc.data());
         });
       }).catch(err => {
       console.log(err)
-    });
 
+    });
   };
 }

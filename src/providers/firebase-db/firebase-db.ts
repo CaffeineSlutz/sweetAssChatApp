@@ -34,7 +34,7 @@ export class FirebaseDbProvider {
   }
 
   createThread(somethin){
-    this.afs.collection('thread').add(somethin);
+    this.afs.collection('threads').add(somethin);
   }
 
   getCurrentUser(){
