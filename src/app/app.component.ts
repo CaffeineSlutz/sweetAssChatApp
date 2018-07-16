@@ -9,7 +9,6 @@ import { LogoutPage } from "../pages/logout/logout";
 import { LoginPage } from '../pages/login/login';
 import {AngularFireAuth} from "angularfire2/auth";
 
-//import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from "angularfire2/database-deprecated";
 
 @Component({
   templateUrl: 'app.html'
@@ -48,7 +47,6 @@ export class MyApp {
 
   closeMenu(){
     this.menuCtrl.close();
-
   }
 
   openPage(page) {

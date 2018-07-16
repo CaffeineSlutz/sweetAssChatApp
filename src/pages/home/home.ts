@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
-import {LoginPage} from '../login/login';
+import {firestore} from "firebase";
+import {AngularFirestore} from "angularfire2/firestore";
+import {Thread} from '../../interfaces/Thread'
 
 @Component({
   selector: 'page-home',
@@ -9,8 +11,45 @@ import {LoginPage} from '../login/login';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private fbp: FirebaseDbProvider) {}
-  goToLogin(){
-    this.navCtrl.push(LoginPage);
+  afs;
+
+  constructor(public navCtrl: NavController,
+              private fbp: FirebaseDbProvider,
+              public Angularfs: AngularFirestore,
+              ) {
+    this.afs = Angularfs;
   }
+
+
+  foundUser;
+
+  newThread: Thread ={
+    threadTitle: '',
+    userCol: {
+      names: [],
+      id: []
+    }
+  };
+
+
+
+  addUser(user) {
+    let userRef = firestore().collection('users');
+
+    userRef.where('name', '==', user.value).get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(snapshot);
+
+          this.foundUser = doc.data();
+          this.newThread.userCol.id.push(this.foundUser.userid);
+          this.newThread.userCol.names.push(this.foundUser.name);
+          this.fbp.createThread(this.newThread.userCol);
+          console.log(doc.id, '=>', doc.data());
+        });
+      }).catch(err => {
+      console.log(err)
+    });
+
+  };
 }

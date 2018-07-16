@@ -18,8 +18,8 @@ export interface Item { content: string; }
 })
 export class FirebaseDbProvider {
 
-  itemsCollection: AngularFirestoreCollection<Item>
-  items: Observable<Item[]>
+  itemsCollection: AngularFirestoreCollection<Item>;
+  items: Observable<Item[]>;
 
   constructor(private afs: AngularFirestore) {
   }
@@ -32,6 +32,11 @@ export class FirebaseDbProvider {
     console.log(user);
     this.afs.collection('users').add(user);
   }
+
+  createThread(somethin){
+    this.afs.collection('thread').add(somethin);
+  }
+
   getCurrentUser(){
     console.log(firebase.auth().currentUser);
   }

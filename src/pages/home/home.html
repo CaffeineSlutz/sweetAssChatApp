@@ -3,19 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Messages</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-content>
-      <img id="user-img" src="https://imgix.ttcdn.co/i/product/original/0/457939-0c324c98c4bd4463b0e8e828cfac91ac.png?quality=50&width=2000&bg-color=fff&auto=webp&fit=bounds&fm=jpeg">
-      <div class="message">
-        <h2 id="message-title">Doge</h2>
-        <p id="message-preview">U wanna git a byte to eat?</p>
-      </div>
+
+  <ion-card >
+    <ion-card-content *ngFor="let name of newThread.userCol.names">
+      {{name}}
     </ion-card-content>
   </ion-card>
+
+  <input #user (keyup.enter)="addUser(user)">
 
 </ion-content>

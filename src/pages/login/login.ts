@@ -47,7 +47,7 @@ export class LoginPage {
           emailAddress:authenticated.user.email,
           image:authenticated.user.photoURL,
           userid:authenticated.user.uid
-        }
+        };
         console.log('saving user');
         this.authService.saveUser(newUser);
       }
