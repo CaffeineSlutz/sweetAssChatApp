@@ -5,17 +5,48 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { Thread } from '../../interfaces/Thread'
 import { LoginPage } from '../login/login';
 import { Message } from '../../interfaces/message';
+import { User } from "../../interfaces/user";
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user: User;
+  searchTerm: string = '';
+  users: any;
+  searchControl: FormControl;
+  searching: any = false;
 
   constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
+    this.searchControl = new FormControl();
+  }
+  ionViewDidLoad() {
+    
+    this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      this.searching = false;
+      this.setFilteredItems();
+    });
+    this.fdp.getUsers().subscribe(users => {
+      this.fdp.users = users;
+      // console.log(users);
+    })
   }
 
-  goToLogin(){
+  onSearchInput() {
+    this.searching = true;
+  }
+
+  setFilteredItems() {
+
+    this.users = this.fdp.filterItems(this.searchTerm);
+
+  }
+  goToLogin() {
     this.navCtrl.push(LoginPage);
   }
 
@@ -50,4 +81,8 @@ export class HomePage {
       })
     });
   }
+  addFriend(){
+    console.log("hello world!");
+  }
+
 }

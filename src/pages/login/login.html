@@ -20,11 +20,12 @@
     <button ion-button outline (click)="signOut()">Logout</button>
   </div>
 
+
   <!--shows before login-->
   <ng-template #showLogin>
     <p>To view The App please sign-in</p>
     <button ion-button outline (click)="signInWithFacebook()"><ion-icon padding-right name="logo-facebook"></ion-icon>Login</button>
-    <button ion-button outline (click)="login()"><ion-icon padding-right name="logo-google"></ion-icon> Login</button>
+    <button ion-button outline (click)="login(users)"><ion-icon padding-right name="logo-google"></ion-icon> Login</button>
   </ng-template>
 
 </ion-content>

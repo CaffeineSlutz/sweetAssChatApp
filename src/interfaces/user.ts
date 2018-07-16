@@ -3,5 +3,5 @@ export interface User {
     image:string;
     userid:string;
     emailAddress:string;
-    friends?:Array<string>;
+    friends:Array<string>;
 }

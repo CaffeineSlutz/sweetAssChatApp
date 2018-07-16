@@ -1,5 +1,10 @@
 page-home {
     ion-content {
+        .spinner-container {
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+        }
         ion-card {
             ion-card-content {
                 display: flex;
@@ -25,3 +30,12 @@ page-home {
         }
     }
 }
+//page-home {
+//
+//  .spinner-container {
+//    width: 100%;
+//    text-align: center;
+//    padding: 10px;
+//  }
+//
+//}

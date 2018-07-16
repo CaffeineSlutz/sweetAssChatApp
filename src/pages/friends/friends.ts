@@ -30,8 +30,10 @@ export class FriendsPage {
     displayName: 'linuxninja39'
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams ){
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FriendsPage');
