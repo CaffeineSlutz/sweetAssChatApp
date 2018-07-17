@@ -20,10 +20,32 @@ export class FirebaseDbProvider {
 
   }
 
-  addFriendToFriendArray(userid) {
-    let ojb = {};
-    ojb[userid] = userid;
-    this.afs.doc('users/' + this.getCurrentUser().uid).collection('friends').add(ojb);
+  addFriendToFriendArray(friendsUserid) {
+    // let obj = {};
+    // obj[userid] = userid;
+    // this.afs.doc('users/' + this.getCurrentUser().uid).collection('friends').add(obj);
+
+    let tempFriendsArray = [];
+    const friend = {
+      uid:friendsUserid
+    }
+    let dbUserRef = this.afs.collection('users').ref;
+    let user = this.getCurrentUser();
+    dbUserRef.onSnapshot(snapshot => snapshot.forEach(doc => {
+      //for each document inside of the snapshot
+      let dd = doc.data();
+      //console.log(dd);
+
+      tempFriendsArray = dd.friends;
+      console.log("tempFriendsArray:");
+      console.log(tempFriendsArray);
+
+      if (dd.userid === friendsUserid) {
+
+        friend.uid = friendsUserid;
+      }
+    }))
+    dbUserRef.doc(user.uid).update({friends:[friend]});
   }
 
   getUsers(): Observable<any> {

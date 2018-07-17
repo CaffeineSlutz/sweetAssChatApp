@@ -65,6 +65,7 @@ export class LoginPage {
       if (authenticated.additionalUserInfo.isNewUser) {
         this.createUser(authenticated);
       }
+      this.navCtrl.push(HomePage);
     });
   }
 
@@ -75,7 +76,7 @@ export class LoginPage {
         emailAddress:auth.user.email,
         image:auth.user.photoURL,
         userid:auth.user.uid,
-        friends:['bal']
+        friends:[]
       };
       this.authService.saveUser(newUser);
     }
