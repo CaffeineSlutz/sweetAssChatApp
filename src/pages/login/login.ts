@@ -64,16 +64,6 @@ export class LoginPage {
       console.log(authenticated);
       if (authenticated.additionalUserInfo.isNewUser) {
         this.createUser(authenticated);
-        const newUser:User = {
-          name:authenticated.user.displayName,
-          emailAddress:authenticated.user.email,
-          image:authenticated.user.photoURL,
-          userid:authenticated.user.uid
-        }
-        // console.log('saving user');
-        // this.authService.saveUser(newUser);
-        // this.afs.collection("users").doc(authenticated.user.uid).collection("Friends").doc("new doc").set({key: "dis bitch value"})
-
       }
     });
   }
@@ -85,7 +75,7 @@ export class LoginPage {
         emailAddress:auth.user.email,
         image:auth.user.photoURL,
         userid:auth.user.uid,
-        friends:[]
+        friends:['bal']
       };
       this.authService.saveUser(newUser);
     }

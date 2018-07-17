@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import { Message } from '../../interfaces/message';
-import {User} from "../../interfaces/user";
-import {FirebaseProviderWithInjectableDecProvider} from "../../providers/firebase-provider-with-injectable-dec/firebase-provider-with-injectable-dec";
+import { User } from "../../interfaces/user";
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
+import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 
 
 @Component({
@@ -19,10 +19,13 @@ export class HomePage {
   searchControl: FormControl;
   searching: any = false;
 
-  constructor(public navCtrl: NavController, public fdp: FirebaseProviderWithInjectableDecProvider) {
+
+  constructor(public navCtrl: NavController,
+              public fdp: FirebaseDbProvider) {
     this.searchControl = new FormControl();
     this.createNewMessage('this is a test message');
   }
+
   ionViewDidLoad() {
 
     this.setFilteredItems();
@@ -36,8 +39,11 @@ export class HomePage {
     this.fdp.getUsers().subscribe(users => {
       this.fdp.users = users;
       console.log(users)
-
     })
+  }
+
+  addFriend(userid){
+    this.fdp.addFriendToFriendArray(userid);
   }
 
   onSearchInput() {
@@ -49,6 +55,7 @@ export class HomePage {
     this.users = this.fdp.filterItems(this.searchTerm);
 
   }
+
   goToLogin() {
     this.navCtrl.push(LoginPage);
   }
@@ -72,8 +79,6 @@ export class HomePage {
     }
 
   }
-  addFriendToFriendArray() {
 
-  }
 
 }
