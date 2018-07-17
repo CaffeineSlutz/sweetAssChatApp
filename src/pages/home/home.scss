@@ -25,3 +25,32 @@ page-home {
         }
     }
 }
+.search{
+  top: 8px;
+  right: 10px;
+  position: absolute;
+}
+.searchStuff{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+.newMessage{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.restofscreen{
+  height: 100%;
+  width: 100%;
+}
+//page-home {
+//
+//  .spinner-container {
+//    width: 100%;
+//    text-align: center;
+//    padding: 10px;
+//  }
+//
+//}

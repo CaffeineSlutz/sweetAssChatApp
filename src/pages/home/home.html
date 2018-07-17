@@ -4,10 +4,34 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Messages</ion-title>
+    <button ion-button class="search" (click)="toggleSearch()">
+      <ion-icon name="search"> </ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
+  <div class="searchStuff" *ngIf="showSearch">
+
+    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+
+    <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        {{user.name}} <{{user.emailAddress}}>   <button (click)="addFriend(user.userid)">Add Friend</button>
+
+      </ion-item>
+    </ion-list>
+    <div class="restofscreen" (click)="toggleSearch()">
+
+    </div>
+
+  </div>
+
   <ion-card>
     <ion-card-content>
       <img id="user-img" src="https://imgix.ttcdn.co/i/product/original/0/457939-0c324c98c4bd4463b0e8e828cfac91ac.png?quality=50&width=2000&bg-color=fff&auto=webp&fit=bounds&fm=jpeg">
@@ -15,13 +39,9 @@
         <h2 id="message-title">Doge</h2>
         <p id="message-preview">U wanna git a byte to eat?</p>
       </div>
-
-  <!-- <ion-card >
-    <ion-card-content *ngFor="let name of newThread.userCol.names">
-      {{name}} -->
     </ion-card-content>
   </ion-card>
-
-  <input #user (keyup.enter)="addUser(user)">
-
+  <button ion-button class="newMessage">
+    <ion-icon name="add-circle"></ion-icon>
+  </button>
 </ion-content>

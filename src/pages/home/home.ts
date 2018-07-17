@@ -1,21 +1,68 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
-import { AngularFirestore } from "angularfire2/firestore";
-import { Thread } from '../../interfaces/Thread'
-import { LoginPage } from '../login/login';
+import {LoginPage} from '../login/login';
 import { Message } from '../../interfaces/message';
+import { User } from "../../interfaces/user";
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
+import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
+import {AngularFirestore} from "angularfire2/firestore";
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user: User;
+  searchTerm: string = '';
+  users: any;
+  searchControl: FormControl;
+  searching: any = false;
 
-  constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
+  showSearch: boolean = false;
+
+  constructor(public navCtrl: NavController,
+              public fdp: FirebaseDbProvider,
+              private afs: AngularFirestore) {
+    this.searchControl = new FormControl();
   }
 
-  goToLogin(){
+  ionViewDidLoad() {
+
+    this.setFilteredItems();
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+
+      this.searching = false;
+      this.setFilteredItems();
+
+
+    });
+    this.fdp.getUsers().subscribe(users => {
+      this.fdp.users = users;
+      console.log(users)
+    })
+  }
+
+  toggleSearch(){
+    this.showSearch = !this.showSearch;
+  }
+
+  addFriend(userid){
+    this.fdp.addFriendToFriendArray(userid);
+  }
+
+  onSearchInput() {
+    this.searching = true;
+  }
+
+  setFilteredItems() {
+
+    this.users = this.fdp.filterItems(this.searchTerm);
+
+  }
+
+  goToLogin() {
     this.navCtrl.push(LoginPage);
   }
 
@@ -31,23 +78,11 @@ export class HomePage {
       message:textMessage,
       dateReadable:`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`,
       timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
-    }
+    };
+
     this.afs.collection('messages').add(msg);
     console.log('message sent to the database!');
   }
-  
-  createThread(input:any){
-    let collRef = this.afs.collection('users').ref;
 
-    collRef.where('name', '==', input.value).onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        let foundUser = doc.data();
-        let thread:Thread;
-        thread.threadTitle = "";
-        thread.userCol.id.push(foundUser.userid);
-        thread.userCol.names.push(foundUser.name);
-        this.fdp.createThread(thread);
-      })
-    });
-  }
+
 }

@@ -6,4 +6,6 @@ export interface Message {
     message:string;
     dateReadable:string;
     timeReadable:string;
+
+
 }
