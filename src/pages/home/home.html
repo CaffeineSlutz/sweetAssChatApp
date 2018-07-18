@@ -22,7 +22,7 @@
 
     <ion-list>
       <ion-item *ngFor="let user of users">
-        {{user.name}} <{{user.emailAddress}}>   <button (click)="addFriend(user.userid)">Add Friend</button>
+        {{user.name}} <{{user.emailAddress}}>   <button (click)="addFriend(user)">Add Friend</button>
 
       </ion-item>
     </ion-list>
@@ -42,7 +42,7 @@
       </div>
     </ion-card-content>
   </ion-card>
-  <button ion-button class="newMessage">
+  <button ion-button class="newMessage" (click)="prompt.present()">
     <ion-icon name="add-circle"></ion-icon>
   </button>
 </ion-content>

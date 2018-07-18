@@ -8,6 +8,7 @@ import 'rxjs/add/operator/debounceTime';
 import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 import {AngularFirestore} from "angularfire2/firestore";
 import { Thread } from '../../interfaces/Thread';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -23,9 +24,37 @@ export class HomePage {
 
   showSearch: boolean = false;
 
-  constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
-    this.searchControl = new FormControl();
-    this.getMessages();
+  prompt = this.alertCtrl.create({
+    title: 'New Message',
+    message: "Please Enter a Chat Name:",
+    inputs: [
+      {
+        name: 'userInput',
+        placeholder: 'ChatName'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          // console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.fdp.createChat(data.userInput);
+        }
+      }
+    ]
+  });
+
+  constructor(public navCtrl: NavController,
+    private afs: AngularFirestore,
+    public fdp:FirebaseDbProvider,
+    public alertCtrl: AlertController) {
+      this.searchControl = new FormControl();
+      this.getMessages();
   }
   ionViewDidLoad() {
 
@@ -43,36 +72,23 @@ export class HomePage {
   onSearchInput() {
     this.searching = true;
   }
+
   toggleSearch(){
     this.showSearch = !this.showSearch;
   }
 
   setFilteredItems() {
-
     this.users = this.fdp.filterUsers(this.searchTerm);
-
   }
+
   goToLogin() {
     this.navCtrl.push(LoginPage);
   }
 
-  createNewMessage(textMessage:string, userUid:string){
-    let currentUser = this.fdp.getCurrentUser();
-    let today = new Date();
-    let messageID:string = currentUser.uid + userUid;
-    const msg:Message = {
-      messageID:messageID,
-      authorName:currentUser.displayName,
-      authorEmail:currentUser.email,
-      read:false,
-      message:textMessage,
-      dateReadable:`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`,
-      timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
-    };
-
-    this.afs.collection('messages').add(msg);
-    //console.log('message sent to the database!');
+  addFriend(friend:User){
+    this.fdp.addFriendToCollection(friend);
   }
+
 
   createThread(input:any){
     let collRef = this.afs.collection('users').ref;
@@ -82,16 +98,17 @@ export class HomePage {
         let foundUser = doc.data();
         let thread:Thread;
         thread.threadTitle = "";
-        thread.userCol.id.push(foundUser.userid);
-        thread.userCol.names.push(foundUser.name);
-        this.fdp.addThread(thread);
+        // thread.userCol.id.push(foundUser.userid);
+        // thread.userCol.names.push(foundUser.name);
+       // this.fdp.addThread(thread);
       })
     });
   }
 
-  addFriend(friendUID){
-    this.fdp.addFriendToCollection(friendUID);
+  createNewMessage(message){
+    let curUser = this.fdp.getCurrentUser().uid;
+    this.fdp.createNewMessage(message, curUser);
   }
-  getMessages(){
-  }
+
+  getMessages(){}
 }
