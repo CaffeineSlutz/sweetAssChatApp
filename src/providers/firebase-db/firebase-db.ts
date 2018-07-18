@@ -16,6 +16,7 @@ export class FirebaseDbProvider {
   itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
   users: any = [];
+  threads:Array<Object>;
 
   constructor(public http: HttpClient, private afs: AngularFirestore) {
   }
@@ -37,13 +38,23 @@ export class FirebaseDbProvider {
     
     dbColRef.doc(thread.messageID).set(thread);
   }
-  getThread(messageID:String) {
+  getThreads(messageID?:String):Array<Object> {
     let dbColRef = this.afs.collection('threads').ref
-    dbColRef.where('messageID', '==', messageID).onSnapshot(snapshot => {
+    let threadArray:Array<Object> = [];
+    dbColRef.onSnapshot(snapshot => {
       snapshot.forEach(doc => {
-        
-      });
+        let dd = doc.data();
+        if(messageID) {
+          if (messageID === dd.messageID) {
+            threadArray.push(dd);
+          }
+        }
+        if(!messageID) {
+          threadArray.push(dd);
+        }
+      })
     })
+    return threadArray
   }
 
   addFriendsToThread(friend:User, threadID:string) {
@@ -60,12 +71,14 @@ export class FirebaseDbProvider {
 
   createChat(threadTitle?:string){
     let randomID = this.afs.createId();
+    // let currentThread:Array<Object>;
     if (!threadTitle) {threadTitle = 'chat';}
     const thread:Thread = {
       threadTitle: threadTitle,
       messageID: randomID
     }
     this.createThread(thread);
+    //this.threads = this.getThreads(randomID);
   }
 
   createNewMessage(textMessage:string, ID:string){
@@ -85,7 +98,10 @@ export class FirebaseDbProvider {
     //console.log('message sent to the database!');
   }
 
-  getMessages(){}
+  getMessages(){
+    let curUser = this.getCurrentUser();
+
+  }
 
   filterItems(searchTerm){
     return this.users.filter((item) => {

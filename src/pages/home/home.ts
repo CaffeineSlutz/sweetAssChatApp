@@ -20,7 +20,7 @@ export class HomePage {
   users:Array<Object>;
   searchControl:FormControl;
   searching:boolean = false;
-  activeMessages:Array<String> = [];
+  activeMessages:any = [];
 
   showSearch: boolean = false;
 
@@ -89,5 +89,12 @@ export class HomePage {
     this.fdp.addFriendToCollection(friend);
   }
 
-  getMessages(){}
+  getMessages(){
+    this.fdp.getCurrentUser();
+    let msgRef = this.afs.collection('messages').ref;
+    msgRef.onSnapshot(snapshot => snapshot.forEach(doc => {
+      let dd = doc.data();
+      this.activeMessages.push(dd);
+    }))
+  }
 }
