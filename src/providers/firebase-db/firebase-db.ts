@@ -45,7 +45,7 @@ export class FirebaseDbProvider {
 
   }
 
-  createThread(something){
+  addThread(something){
     this.afs.collection('thread').add(something);
   }
   createFriend(friend){

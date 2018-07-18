@@ -9,10 +9,8 @@ import { FirebaseDbProvider } from '../../providers/firebase-db/firebase-db';
 import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
 import {Observable} from "rxjs/Observable";
 import { map } from 'rxjs/operators';
-<<<<<<< Updated upstream
 import {Facebook} from "@ionic-native/facebook";
-=======
->>>>>>> Stashed changes
+
 
 
 export interface UserId extends User{
@@ -35,10 +33,7 @@ export class LoginPage {
     public navParams: NavParams,
     private afAuth: AngularFireAuth,
     private platform: Platform,
-<<<<<<< Updated upstream
     private fb: Facebook,
-=======
->>>>>>> Stashed changes
     private authService: FirebaseDbProvider,
     private afs: AngularFirestore
   ) {
@@ -72,20 +67,9 @@ export class LoginPage {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(authenticated => {
       //console.log(authenticated);
       if (authenticated.additionalUserInfo.isNewUser) {
-<<<<<<< Updated upstream
         this.createUser(authenticated);
-=======
-        const newUser:User = {
-          name:authenticated.user.displayName,
-          emailAddress:authenticated.user.email,
-          image:authenticated.user.photoURL,
-          userid:authenticated.user.uid
-        }
-        console.log('saving user');
-        this.authService.saveUser(newUser);
         // this.afs.collection("users").doc(authenticated.user.uid).collection("Friends").doc("new doc").set({key: "dis bitch value"})
 
->>>>>>> Stashed changes
       }
     });
   }
@@ -102,7 +86,6 @@ export class LoginPage {
     }
   }
 
-<<<<<<< Updated upstream
   signInWithFacebook() {
     if (this.platform.is('cordova')) {
       return this.fb.login(['email', 'public_profile']).then(res => {
@@ -117,22 +100,7 @@ export class LoginPage {
         .then(res => console.log(res));
     }
   }
-=======
 
- addFriendsCollection(users: UserId){
-   // this.afs.collection("users").doc("Your Face Is Gay").collection("new Collection").doc.("new doc").set({key: "dis bitch value"})
-   //   .then(() => console.log('done'))
-   // ;
-   //working ^^
-
-   // this.afs.collection("users").doc("Friends").collection("threads").doc('message').set({fred: "is cool"})
-   //   .then(() => console.log('done'))
-   // ;
-   //^^ works as well
-   // this.userCollection.doc(users.id).set(users);
-
- }
->>>>>>> Stashed changes
 
   public signOut() {
     this.afAuth.auth.signOut();
