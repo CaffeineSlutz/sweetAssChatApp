@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import {Facebook} from "@ionic-native/facebook";
 
 
+
 export interface UserId extends User{
   id: string;
 }
@@ -67,6 +68,8 @@ export class LoginPage {
       //console.log(authenticated);
       if (authenticated.additionalUserInfo.isNewUser) {
         this.createUser(authenticated);
+        // this.afs.collection("users").doc(authenticated.user.uid).collection("Friends").doc("new doc").set({key: "dis bitch value"})
+
       }
     });
   }
@@ -77,8 +80,7 @@ export class LoginPage {
         name:auth.user.displayName,
         emailAddress:auth.user.email,
         image:auth.user.photoURL,
-        userid:auth.user.uid,
-        friends:[]
+        userid:auth.user.uid
       };
       this.authService.saveUser(newUser);
     }
@@ -98,6 +100,7 @@ export class LoginPage {
         .then(res => console.log(res));
     }
   }
+
 
   public signOut() {
     this.afAuth.auth.signOut();
