@@ -53,7 +53,7 @@ export class HomePage {
     private afs: AngularFirestore,
     private fdp:FirebaseDbProvider,
     public alertCtrl: AlertController) {
-      this.searchControl = new FormControl();
+    this.searchControl = new FormControl();
       this.getMessages();
   }
   ionViewDidLoad() {
@@ -91,3 +91,6 @@ export class HomePage {
 
   getMessages(){}
 }
+
+
+

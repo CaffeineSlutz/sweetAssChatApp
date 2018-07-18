@@ -1,18 +1,13 @@
-<!--
-  Generated template for the FriendsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Friends</ion-title>
+    <ion-title>Messages</ion-title>
+    <button ion-button class="search" (click)="toggleSearch()">
+      <ion-icon name="search"> </ion-icon>
+    </button>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
@@ -20,42 +15,31 @@
     Ya Friends M8:
   </ion-title>
 
-  <ion-card>
-  <ion-card-content>
-    Name: {{ friend.firstName }} {{ friend.lastName }},
-    Display Name: {{ friend.displayName }}
-  </ion-card-content>
-  </ion-card>
-  <ion-card>
-  <ion-card-content>
-    Name: {{ friend1.firstName }} {{ friend1.lastName }},
-    Display Name: {{ friend1.displayName }}
-  </ion-card-content>
-  </ion-card>
-  <ion-card>
-  <ion-card-content>
-    Name: {{ friend2.firstName }} {{ friend2.lastName }},
-    Display Name: {{ friend2.displayName }}
-  </ion-card-content>
-  </ion-card>
 
-  <ion-title>
-    Recommend Friends:
-  </ion-title>
+  <!--<ion-list>-->
+    <!--<ion-item *ngFor="let user of users">-->
+      <!--{{user.name}}   <button (click)="showFriend(user.userid)">Show Friends</button>-->
 
-  <ion-card>
-  <ion-card-content>
-    <ion-icon name="add-circle"></ion-icon>  Dean Jones
-  </ion-card-content>
-  </ion-card>
-  <ion-card>
-  <ion-card-content>
-    <ion-icon name="add-circle"></ion-icon>  Bobby Lane
-  </ion-card-content>
-  </ion-card>
-  <ion-card>
-  <ion-card-content>
-    <ion-icon name="add-circle"></ion-icon>  Hoppy Morgan
-  </ion-card-content>
-  </ion-card>
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+
+  <div class="searchStuff" *ngIf="showSearch">
+
+    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+
+    <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        {{user.name}} <{{user.emailAddress}}>
+
+      </ion-item>
+    </ion-list>
+    <div class="restofscreen" (click)="toggleSearch()">
+
+    </div>
+
+  </div>
 </ion-content>

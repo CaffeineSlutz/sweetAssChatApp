@@ -34,14 +34,14 @@ export class FirebaseDbProvider {
 
   createThread(thread:Thread) {
     let dbColRef = this.afs.collection(`threads`).ref;
-    
+
     dbColRef.doc(thread.messageID).set(thread);
   }
   getThread(messageID:String) {
     let dbColRef = this.afs.collection('threads').ref
     dbColRef.where('messageID', '==', messageID).onSnapshot(snapshot => {
       snapshot.forEach(doc => {
-        
+
       });
     })
   }
@@ -50,11 +50,11 @@ export class FirebaseDbProvider {
     let dbColRef = this.afs.collection('threads').ref;
     dbColRef.doc(threadID).collection('friends').doc(friend.userid).set(friend);
   }
-  
+
   addFriendToCollection(friend:User) {
     let curUser = this.getCurrentUser();
     let friendsColRef = this.afs.collection(`users/${curUser.uid}/friends`).ref;
-    
+
     friendsColRef.doc(friend.userid).set(friend);
   }
 
@@ -98,5 +98,16 @@ export class FirebaseDbProvider {
       return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
   }
+
+  showFriendFromCollection(userid){
+    let obj = {};
+    obj[userid] = userid;
+    this.afs.doc('users/' + this.getCurrentUser().uid).collection('friends');
+    let curUser = this.getCurrentUser();
+    let friendsColRef = this.afs.collection(`users/${curUser.uid}/friends`).ref;
+
+    friendsColRef.doc(userid.userid).set(userid);
+  }
+
 
 }
