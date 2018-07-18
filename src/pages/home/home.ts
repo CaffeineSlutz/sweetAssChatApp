@@ -43,42 +43,34 @@ export class HomePage {
   onSearchInput() {
     this.searching = true;
   }
+
   toggleSearch(){
     this.showSearch = !this.showSearch;
   }
 
   setFilteredItems() {
-
     this.users = this.fdp.filterUsers(this.searchTerm);
-
   }
+
   goToLogin() {
     this.navCtrl.push(LoginPage);
   }
 
-  createNewMessage(textMessage:string, userUid:string){
-    let currentUser = this.fdp.getCurrentUser();
-    let today = new Date();
-    let messageID:string = currentUser.uid + userUid;
-    const msg:Message = {
-      messageID:messageID,
-      authorName:currentUser.displayName,
-      authorEmail:currentUser.email,
-      read:false,
-      message:textMessage,
-      dateReadable:`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`,
-      timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
-    };
-
-    this.afs.collection('messages').add(msg);
-    //console.log('message sent to the database!');
-  }
-  addFriend(friendUID){
-    this.fdp.addFriendToCollection(friendUID);
+  addFriend(friend:User){
+    this.fdp.addFriendToCollection(friend);
   }
 
-  createThread(userUID){
-    
+  createChat(threadTitle?:string){
+    let randomID:string = this.afs.createId.toString();
+    if (!threadTitle) {threadTitle = 'chat';}
+    const thread:Thread = {
+      threadTitle: threadTitle,
+      messageID: randomID
+    }
+    this.fdp.createThread(thread);
+    // this.fdp.addFriendsToThread()// this is where i left off at 4 AM
+
   }
+
   getMessages(){}
 }
