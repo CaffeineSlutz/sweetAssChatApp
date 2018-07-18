@@ -8,6 +8,7 @@ import 'rxjs/add/operator/debounceTime';
 import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
 import {AngularFirestore} from "angularfire2/firestore";
 import { Thread } from '../../interfaces/Thread';
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -23,9 +24,37 @@ export class HomePage {
 
   showSearch: boolean = false;
 
-  constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
-    this.searchControl = new FormControl();
-    this.getMessages();
+  prompt = this.alertCtrl.create({
+    title: 'New Message',
+    message: "Please Enter a Chat Name:",
+    inputs: [
+      {
+        name: 'userInput',
+        placeholder: 'ChatName'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          // console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.fdp.createChat(data.userInput);
+        }
+      }
+    ]
+  });
+
+  constructor(public navCtrl: NavController,
+    private afs: AngularFirestore,
+    private fdp:FirebaseDbProvider,
+    public alertCtrl: AlertController) {
+      this.searchControl = new FormControl();
+      this.getMessages();
   }
   ionViewDidLoad() {
 
@@ -58,18 +87,6 @@ export class HomePage {
 
   addFriend(friend:User){
     this.fdp.addFriendToCollection(friend);
-  }
-
-  createChat(threadTitle?:string){
-    let randomID:string = this.afs.createId.toString();
-    if (!threadTitle) {threadTitle = 'chat';}
-    const thread:Thread = {
-      threadTitle: threadTitle,
-      messageID: randomID
-    }
-    this.fdp.createThread(thread);
-    // this.fdp.addFriendsToThread()// this is where i left off at 4 AM
-
   }
 
   getMessages(){}

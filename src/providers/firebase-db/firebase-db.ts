@@ -37,6 +37,14 @@ export class FirebaseDbProvider {
     
     dbColRef.doc(thread.messageID).set(thread);
   }
+  getThread(messageID:String) {
+    let dbColRef = this.afs.collection('threads').ref
+    dbColRef.where('messageID', '==', messageID).onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
+        
+      });
+    })
+  }
 
   addFriendsToThread(friend:User, threadID:string) {
     let dbColRef = this.afs.collection('threads').ref;
@@ -48,6 +56,16 @@ export class FirebaseDbProvider {
     let friendsColRef = this.afs.collection(`users/${curUser.uid}/friends`).ref;
     
     friendsColRef.doc(friend.userid).set(friend);
+  }
+
+  createChat(threadTitle?:string){
+    let randomID = this.afs.createId();
+    if (!threadTitle) {threadTitle = 'chat';}
+    const thread:Thread = {
+      threadTitle: threadTitle,
+      messageID: randomID
+    }
+    this.createThread(thread);
   }
 
   createNewMessage(textMessage:string, ID:string){
