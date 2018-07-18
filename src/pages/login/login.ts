@@ -49,8 +49,10 @@ export class LoginPage {
     afAuth.authState.subscribe((user: firebase.User) => {
       if (!user) {
         this.displayName = null;
-        navCtrl.setRoot(HomePage);
         return;
+      }
+      else{
+        this.navCtrl.setRoot(HomePage);
       }
       this.displayName = user.displayName;
     });
