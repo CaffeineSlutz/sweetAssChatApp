@@ -73,7 +73,7 @@ export class HomePage {
     this.afs.collection('messages').add(msg);
     //console.log('message sent to the database!');
   }
-  
+
   createThread(input:any){
     let collRef = this.afs.collection('users').ref;
 
@@ -88,6 +88,7 @@ export class HomePage {
       })
     });
   }
+
   addFriend(friendUID){
     this.fdp.addFriendToCollection(friendUID);
   }

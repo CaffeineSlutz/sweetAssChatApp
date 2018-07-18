@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AngularFirestore} from "angularfire2/firestore";
 
 /**
  * Generated class for the ActiveMessagePage page.
@@ -15,11 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ActiveMessagePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private afs: AngularFirestore) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActiveMessagePage');
+  }
+
+  getMessages(){
+   let messageRef = this.afs.collection('messages').ref;
+
   }
 
 }
