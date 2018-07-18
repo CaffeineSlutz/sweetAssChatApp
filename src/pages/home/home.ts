@@ -73,24 +73,12 @@ export class HomePage {
     this.afs.collection('messages').add(msg);
     //console.log('message sent to the database!');
   }
-  
-  createThread(input:any){
-    let collRef = this.afs.collection('users').ref;
-
-    collRef.where('name', '==', input.value).onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        let foundUser = doc.data();
-        let thread:Thread;
-        thread.threadTitle = "";
-        thread.userCol.id.push(foundUser.userid);
-        thread.userCol.names.push(foundUser.name);
-        this.fdp.addThread(thread);
-      })
-    });
-  }
   addFriend(friendUID){
     this.fdp.addFriendToCollection(friendUID);
   }
-  getMessages(){
+
+  createThread(userUID){
+    
   }
+  getMessages(){}
 }

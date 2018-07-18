@@ -59,7 +59,7 @@ export class FirebaseDbProvider {
   //   return firebase.auth().currentUser;
   // }
   createThread(Thread){
-    this.afs.collection('thread').add(Thread);
+    // this.afs.collection('thread').add(Thread);//this adds the thread to the database
   }
   createFriend(friend){
     this.afs.collection('users').add(friend);
