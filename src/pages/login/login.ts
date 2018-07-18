@@ -49,6 +49,7 @@ export class LoginPage {
     afAuth.authState.subscribe((user: firebase.User) => {
       if (!user) {
         this.displayName = null;
+        navCtrl.setRoot(HomePage);
         return;
       }
       this.displayName = user.displayName;
@@ -98,6 +99,7 @@ export class LoginPage {
 
   public signOut() {
     this.afAuth.auth.signOut();
+    this.navCtrl.setRoot(LoginPage);
   }
 
   continueToApp(displayName){

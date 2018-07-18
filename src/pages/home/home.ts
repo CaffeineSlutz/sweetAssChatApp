@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FirebaseDbProvider} from '../../providers/firebase-db/firebase-db';
-import { AngularFirestore } from "angularfire2/firestore";
-import { Thread } from '../../interfaces/Thread'
-import { LoginPage } from '../login/login';
+import {LoginPage} from '../login/login';
 import { Message } from '../../interfaces/message';
 import { User } from "../../interfaces/user";
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
+import { FirebaseDbProvider} from "../../providers/firebase-db/firebase-db";
+import {AngularFirestore} from "angularfire2/firestore";
+import { Thread } from '../../interfaces/Thread';
 
 
 @Component({
@@ -20,6 +20,8 @@ export class HomePage {
   searchControl:FormControl;
   searching:boolean = false;
   activeMessages:Array<String> = [];
+
+  showSearch: boolean = false;
 
   constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
     this.searchControl = new FormControl();
@@ -40,6 +42,9 @@ export class HomePage {
 
   onSearchInput() {
     this.searching = true;
+  }
+  toggleSearch(){
+    this.showSearch = !this.showSearch;
   }
 
   setFilteredItems() {
@@ -63,7 +68,8 @@ export class HomePage {
       message:textMessage,
       dateReadable:`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`,
       timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
-    }
+    };
+
     this.afs.collection('messages').add(msg);
     //console.log('message sent to the database!');
   }

@@ -29,28 +29,27 @@ page-home {
                 }
             }
         }
-        ion-list {
-            ion-item {
-                .label {
-                    display:flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    
-                    .profilePic {
-                        width: 3em;
-                        height: 3em;
-                        border-radius: 100%;
-                    }
-                    .userInfo {
-                        display:flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-self: flex-start
-                    }
-                }
-            }
-        }
     }
+}
+.search{
+  top: 8px;
+  right: 10px;
+  position: absolute;
+}
+.searchStuff{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+.newMessage{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.restofscreen{
+  height: 100%;
+  width: 100%;
 }
 //page-home {
 //
