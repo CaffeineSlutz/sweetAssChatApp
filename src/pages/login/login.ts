@@ -61,7 +61,7 @@ export class LoginPage {
 
   login() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(authenticated => {
-      console.log(authenticated);
+      //console.log(authenticated);
       if (authenticated.additionalUserInfo.isNewUser) {
         this.createUser(authenticated);
       }

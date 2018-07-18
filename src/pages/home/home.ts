@@ -15,17 +15,18 @@ import 'rxjs/add/operator/debounceTime';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  user: User;
   searchTerm: string = '';
-  users: any;
-  searchControl: FormControl;
-  searching: any = false;
+  users:Array<Object>;
+  searchControl:FormControl;
+  searching:boolean = false;
+  activeMessages:Array<String> = [];
 
   constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
     this.searchControl = new FormControl();
+    this.getMessages();
   }
   ionViewDidLoad() {
-    
+
     this.setFilteredItems();
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
       this.searching = false;
@@ -43,7 +44,7 @@ export class HomePage {
 
   setFilteredItems() {
 
-    this.users = this.fdp.filterItems(this.searchTerm);
+    this.users = this.fdp.filterUsers(this.searchTerm);
 
   }
   goToLogin() {
@@ -64,7 +65,7 @@ export class HomePage {
       timeReadable:`${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
     }
     this.afs.collection('messages').add(msg);
-    console.log('message sent to the database!');
+    //console.log('message sent to the database!');
   }
   
   createThread(input:any){
@@ -77,12 +78,13 @@ export class HomePage {
         thread.threadTitle = "";
         thread.userCol.id.push(foundUser.userid);
         thread.userCol.names.push(foundUser.name);
-        this.fdp.createThread(thread);
+        this.fdp.addThread(thread);
       })
     });
   }
-  addFriend(){
-    console.log("hello world!");
+  addFriend(friendUID){
+    this.fdp.addFriendToCollection(friendUID);
   }
-
+  getMessages(){
+  }
 }

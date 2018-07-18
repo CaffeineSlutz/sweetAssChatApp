@@ -14,6 +14,7 @@ export class FirebaseDbProvider {
   itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
   users: any = [];
+  friends: any =[];
 
   constructor(public http: HttpClient, private afs: AngularFirestore) {
   }
@@ -23,10 +24,10 @@ export class FirebaseDbProvider {
   }
 
   saveUser(user:User) {
-    this.afs.collection('users').add(user);
+    this.afs.collection('users').doc(user.userid).set(user);
   }
 
-  createThread(threadObject:Object){
+  addThread(threadObject:Object){
     this.afs.collection('thread').add(threadObject);
   }
 
@@ -34,15 +35,20 @@ export class FirebaseDbProvider {
     //console.log(firebase.auth().currentUser);
     return firebase.auth().currentUser;
   }
-  createFriend(friend){
-    this.afs.collection('users').add(friend);
+  
+  addFriendToCollection(friendsUID) {
+    let curUser = this.getCurrentUser();
+    let friendsDB = this.afs.collection(`users/${curUser.uid}/friends`).ref;
+    friendsDB.onSnapshot(snapshot => {
+      snapshot.forEach(element => {
+        console.log(element.exists);
+      });
+    })
   }
-  filterItems(searchTerm){
-
+  filterUsers(searchTerm){
     return this.users.filter((item) => {
       return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
 
   }
-  // searchCollection(collN:string, )
 }
