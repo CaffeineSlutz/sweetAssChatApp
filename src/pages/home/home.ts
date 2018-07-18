@@ -15,15 +15,19 @@ import { Thread } from '../../interfaces/Thread';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  user: User;
   searchTerm: string = '';
-  users:Array<Object>;
+  // users:Array<Object>;
+  users: any;
   searchControl:FormControl;
   searching:boolean = false;
   activeMessages:Array<String> = [];
 
   showSearch: boolean = false;
 
-  constructor(public navCtrl: NavController, private afs: AngularFirestore, private fdp:FirebaseDbProvider) {
+  constructor(public navCtrl: NavController,
+              private afs: AngularFirestore,
+              private fdp:FirebaseDbProvider) {
     this.searchControl = new FormControl();
     this.getMessages();
   }
@@ -73,7 +77,8 @@ export class HomePage {
     this.afs.collection('messages').add(msg);
     //console.log('message sent to the database!');
   }
-  
+
+
   createThread(input:any){
     let collRef = this.afs.collection('users').ref;
 
@@ -91,6 +96,9 @@ export class HomePage {
   addFriend(friendUID){
     this.fdp.addFriendToCollection(friendUID);
   }
+
+
+
   getMessages(){
   }
 }

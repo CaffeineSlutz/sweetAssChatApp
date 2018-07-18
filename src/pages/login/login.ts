@@ -77,8 +77,7 @@ export class LoginPage {
         name:auth.user.displayName,
         emailAddress:auth.user.email,
         image:auth.user.photoURL,
-        userid:auth.user.uid,
-        friends:[]
+        userid:auth.user.uid
       };
       this.authService.saveUser(newUser);
     }
