@@ -58,8 +58,8 @@ export class FirebaseDbProvider {
   //   console.log(firebase.auth().currentUser, "what you wanna see");
   //   return firebase.auth().currentUser;
   // }
-  createThread(something){
-    this.afs.collection('thread').add(something);
+  createThread(Thread){
+    this.afs.collection('thread').add(Thread);
   }
   createFriend(friend){
     this.afs.collection('users').add(friend);
