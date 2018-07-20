@@ -17,9 +17,13 @@
 
 <ion-content padding>
 
-  <div *ngFor="let message of sent">{{message.message}}</div>
+  <ion-card *ngFor="let message of sent">
+    <ion-card-header class="senderName">{{message.authorName}}</ion-card-header>
+    <ion-card-content>{{message.message}}</ion-card-content>
+  </ion-card>
 
 
-  <ion-input id="textbar" #message (keyup.enter)="newMessage(message)" type="text"></ion-input>
-
+  <div class="messageInput">
+    <input id="textbar" #message (keyup.enter)="newMessage(message)" type="text">
+  </div>
 </ion-content>

@@ -1,6 +1,25 @@
 page-active-message {
+  //width: 100%;
+  //text-align: center;
+}
 
+.messageInput{
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  height: 40px;
+  background-color: white;
 }
 #textbar{
-  border: 1px solid black;
+  //display: block;
+  border: 2px solid lightslategray;
+  border-radius: 10px;
+  width: 25%;
+  height: 30px;
+  //bottom: 30px;
+  //margin: 0 auto;
+}
+.senderName{
+  font-size: 8px;
 }
