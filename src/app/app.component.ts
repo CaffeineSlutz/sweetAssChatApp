@@ -8,6 +8,7 @@ import { FriendsPage } from "../pages/friends/friends";
 import { LogoutPage } from "../pages/logout/logout";
 import { LoginPage } from '../pages/login/login';
 import {AngularFireAuth} from "angularfire2/auth";
+import {ActiveMessagePage} from "../pages/active-message/active-message";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class MyApp {
       { title: 'Messages', component: HomePage},
       { title: 'Friends', component: FriendsPage},
       { title: 'Logout', component: LogoutPage},
+      { title: 'active', component: ActiveMessagePage}
     ];
   }
 

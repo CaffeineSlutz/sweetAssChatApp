@@ -22,6 +22,8 @@ import { FirebaseDbProvider } from '../providers/firebase-db/firebase-db';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Facebook } from '@ionic-native/facebook';
+import {ActiveMessagePage} from "../pages/active-message/active-message";
+import {ActiveMessagePageModule} from "../pages/active-message/active-message.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { Facebook } from '@ionic-native/facebook';
     LoginPageModule,
     NotificationsPageModule,
     LogoutPageModule,
+    ActiveMessagePageModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FbAdminConfig),
     AngularFirestoreModule,
