@@ -16,7 +16,6 @@ export class FirebaseDbProvider {
   itemsCollection: AngularFirestoreCollection<Item>;
   items: Observable<Item[]>;
   users: any = [];
-  threads:Array<Object>;
 
   constructor(public http: HttpClient, private afs: AngularFirestore) {
   }
@@ -34,35 +33,14 @@ export class FirebaseDbProvider {
   }
 
   createThread(thread:Thread) {
-    let dbColRef = this.afs.collection(`threads`).ref;
-    
-    dbColRef.doc(thread.messageID).set(thread);
-  }
-  getThreads(messageID?:String):Array<Object> {
-    let dbColRef = this.afs.collection('threads').ref
-    let threadArray:Array<Object> = [];
-    dbColRef.onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        let dd = doc.data();
-        if(messageID) {
-          if (messageID === dd.messageID) {
-            threadArray.push(dd);
-          }
-        }
-        if(!messageID) {
-          threadArray.push(dd);
-        }
-      })
-    })
-    return threadArray
-  }
-
-  addFriendsToThread(friend:User, threadID:string) {
-    let dbColRef = this.afs.collection('threads').ref;
-    dbColRef.doc(threadID).collection('friends').doc(friend.userid).set(friend);
+    let currentUser = this.getCurrentUser();
+    let threadsColRef = this.afs.collection(`threads`).ref;
+    let usersColRef = this.afs.collection('users').ref;
+    threadsColRef.doc(thread.messageID).set(thread);
+    usersColRef.doc(`${currentUser.uid}/threads/${thread.messageID}`).set(thread);
   }
   
-  addFriendToCollection(friend:User) {
+  addUserToFriendsCollection(friend:User) {
     let curUser = this.getCurrentUser();
     let friendsColRef = this.afs.collection(`users/${curUser.uid}/friends`).ref;
     
@@ -70,6 +48,7 @@ export class FirebaseDbProvider {
   }
 
   createChat(threadTitle?:string){
+    let currentUser = this.getCurrentUser();
     let randomID = this.afs.createId();
     // let currentThread:Array<Object>;
     if (!threadTitle) {threadTitle = 'chat';}
@@ -78,7 +57,6 @@ export class FirebaseDbProvider {
       messageID: randomID
     }
     this.createThread(thread);
-    //this.threads = this.getThreads(randomID);
   }
 
   createNewMessage(textMessage:string, ID:string){
@@ -98,16 +76,7 @@ export class FirebaseDbProvider {
     //console.log('message sent to the database!');
   }
 
-  getMessages(){
-    let curUser = this.getCurrentUser();
-
-  }
-
-  filterItems(searchTerm){
-    return this.users.filter((item) => {
-      return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-  }
+  getMessages(threadID:string){}
 
   filterUsers(searchTerm){
     return this.users.filter((item) => {

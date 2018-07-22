@@ -20,41 +20,16 @@ export class HomePage {
   users:Array<Object>;
   searchControl:FormControl;
   searching:boolean = false;
-  activeMessages:any = [];
+  prompt;
 
   showSearch: boolean = false;
-
-  prompt = this.alertCtrl.create({
-    title: 'New Message',
-    message: "Please Enter a Chat Name:",
-    inputs: [
-      {
-        name: 'userInput',
-        placeholder: 'ChatName'
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          // console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          this.fdp.createChat(data.userInput);
-        }
-      }
-    ]
-  });
 
   constructor(public navCtrl: NavController,
     private afs: AngularFirestore,
     public fdp:FirebaseDbProvider,
     public alertCtrl: AlertController) {
       this.searchControl = new FormControl();
-      this.getMessages();
+      this.createPrompt();
   }
   ionViewDidLoad() {
 
@@ -86,15 +61,33 @@ export class HomePage {
   }
 
   addFriend(friend:User){
-    this.fdp.addFriendToCollection(friend);
+    this.fdp.addUserToFriendsCollection(friend);
   }
 
-  getMessages(){
-    this.fdp.getCurrentUser();
-    let msgRef = this.afs.collection('messages').ref;
-    msgRef.onSnapshot(snapshot => snapshot.forEach(doc => {
-      let dd = doc.data();
-      this.activeMessages.push(dd);
-    }))
+  createPrompt(){
+    this.prompt = this.alertCtrl.create({
+      title: 'New Message',
+      message: "Please Enter a Chat Name:",
+      inputs: [
+        {
+          name: 'userInput',
+          placeholder: 'ChatName'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            this.createPrompt();
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.fdp.createChat(data.userInput);
+          }
+        }
+      ]
+    });
   }
 }
