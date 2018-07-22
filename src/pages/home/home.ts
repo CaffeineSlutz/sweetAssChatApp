@@ -51,7 +51,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     private afs: AngularFirestore,
-    private fdp:FirebaseDbProvider,
+    public fdp:FirebaseDbProvider,
     public alertCtrl: AlertController) {
       this.searchControl = new FormControl();
       this.getMessages();
